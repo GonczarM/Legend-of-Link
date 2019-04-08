@@ -1,5 +1,6 @@
-#zelda {	
-/*	position: absolute;*/
-  height: 176px;
-  width: 256px;
+canvas {
+	border: 1px solid gray;
+	width: 480px;
+	height: 600px;
 }
+
