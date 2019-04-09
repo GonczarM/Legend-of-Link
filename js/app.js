@@ -5,41 +5,34 @@ const tileW = 30;
 const tileH = 30;
 const mapW = 16;
 const mapH = 20;
-function indexCoord(index){
-	const x = index % mapW;
-	const y = Math.floor(index/mapW);
-	return[x,y];
-}
-function mapCoord(x, y, mapW){
-	return y * mapW + x;
-}
+const tSize = 30;
+const col = 20;
+const row = 16;
 
-const map = [
-		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
-		1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-		1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	];
+let map = [
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,
+	1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
+	1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
+	1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,1,0,0,0,1,0,0,1,0,0,0,1,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+];
 
-mapIndex = 0;	
-
-class sprite {
+class Sprite {
 	constructor(picture){
 		this.image = new Image();
 		this.image.src = picture;
@@ -49,14 +42,30 @@ class sprite {
 	}
 };
 
-const grass = new sprite("images/grass.png");
-const link = new sprite("images/link.png");
-const dirt = new sprite("images/dirt.png");
-let playerX = tileW*8;
-let playerY = tileH*10
+class Enemy {
+	constructor(x, y){
+		this.x = x;
+		this.y = y;
+		this.speed = 2;
+		this.move = function(){
+			this.x = this.x + 1
+		}
+	}
+}
+
+const grass = new Sprite("images/grass.png");
+const link = new Sprite("images/link.png");
+const dirt = new Sprite("images/dirt.png");
+const ghosts = new Sprite("images/enemies.png");
 
 const player = {
+	x: tileW*8,
+	y: tileH*10,
 	attack: false,
+	aCollision: false,
+	speed: 2, 
+	tileY: null,
+	tileX: null,
 	direction: {
     up: false,
     down: false,
@@ -64,13 +73,14 @@ const player = {
     right: false		
 	},
 	draw(){
-		link.draw(playerX, playerY)
+		link.draw(this.x, this.y)
 	},
 	move(){
-		if(this.direction.up) playerY -= 2;
-    if(this.direction.left) playerX -= 2;
-    if(this.direction.right) playerX += 2;
-    if(this.direction.down) playerY += 2;
+		if(this.direction.up) this.y -= this.speed;
+    if(this.direction.left) this.x -= this.speed;
+    if(this.direction.right) this.x += this.speed;
+    if(this.direction.down) this.y += this.speed;
+    
 	},
 	startDirection(key){
     if(key == 'w') this.direction.up = true;
@@ -83,13 +93,88 @@ const player = {
     if(key == 'a') this.direction.left = false;
     if(key == 's') this.direction.down = false;
     if(key == 'd') this.direction.right = false;
+  },
+  checkCollisionWall(){
+  	// let prevX = this.x;
+  	// let prevY = this.y;
+  	if(this.y < tileH){
+  		this.y += 3;
+  		return this.aCollision = true;
+  	}
+  	if(this.x + tileW > canvas.width - tileW){
+  		this.x -= 3
+  		return this.aCollision = true;
+  	}
+  	if(this.y + tileH > canvas.height - tileH){
+  		this.y -= 3;
+  		return this.aCollision = true;
+  	}
+  	if(this.x + this.speed < tileH){
+  		this.x += 3;
+  		return this.aCollision = true;
+  	}
+  	else{
+  		return this.aCollision = false;
+  	}
+
+		// for(let x = 0; x < mapH; x++){
+		// 	for(let y = 0; y < mapW; y++){
+		// 		let tileType = map[mapIndex];
+		// 		player
+		// 			xOverlap = (this.x < tileX + tileW) &&
+		// 			(this.x + tileW > tileX)
+		// 			yOverlap = (this.y < tileY + tileH) &&
+		// 			(this.y + tileH > tileY)
+		// 			collision = xOverlap && yOverlap
+		// 			if(collision){
+		// 				this.aCollision = true;
+		// 			}
+		// 		}
+		// 	}
+		// }
+  },
+  collide(){
+  	ogPosition = this.position;
+  	this.position = this.position + this.speed;
+  	if(this.aCollision === true){
+  		this.position = ogPosition;
+  	}
   }	
-}
+};
+
+
+// const enemies = {
+// 	speed: 1,
+// 	x: tileW*4,
+// 	y: tileH*4,
+// 	xVel: 1,
+// 	yVel: 1,
+// 	draw(){
+// 		ghosts.draw(this.x, this.y)
+// 		// ghosts.draw(tileW*4, tileH*9)
+// 		// ghosts.draw(tileW*4, tileH*15)
+// 		// ghosts.draw(tileW*11, tileH*4)
+// 		// ghosts.draw(tileW*11, tileH*9)
+// 		// ghosts.draw(tileW*11, tileH*15)
+// 	},
+// 	move(){
+// 		this.y = this.y + this.speed;
+// 		if(this.y > canvas.height - tileH || this.y < tileH){
+// 			this.yVel = -this.yVel
+// 		}
+//  		this.x = this.x + this.speed;
+//  		if(this.x > canvas.width - tileW || this.y < tileW){
+//  			this.xVel = -this.xVel
+//  		}
+ 	
+
+//   }
+// }
 
 function drawGame(){
 	mapIndex = 0;
-	for(let y = 0; y < 20;y++){
-		for(let x = 0; x < 16;x++, mapIndex++){
+	for(let y = 0; y < mapH;y++){
+		for(let x = 0; x < mapW;x++, mapIndex++){
 			let tileX = x*tileW;
 			let tileY = y*tileH;
 			let tileType = map[mapIndex];
@@ -104,10 +189,14 @@ function drawGame(){
 };
 
 function animate() {
+	// enemies.move();
 	player.move();
 	clearCanvas();
 	drawGame();
+	// enemies.draw();
 	player.draw();
+	player.checkCollisionWall();
+	console.log(player.aCollision);
 	window.requestAnimationFrame(animate);
 }
 animate();
