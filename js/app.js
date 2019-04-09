@@ -90,6 +90,7 @@ const player = {
 	x: tileW*8,
 	y: tileH*10,
 	unsheath: false,
+	kill: false,
 	speed: 2, 
 	// tileY: null,
 	// tileX: null,
@@ -120,25 +121,73 @@ const player = {
     if(key == 's') this.direction.down = false;
     if(key == 'd') this.direction.right = false;
   },
-  attack(){
-		 	
-  },
-  drawAttack(key){
-  	if(key == ' '){
-  		this.unsheath = true;
+  attack(enemy){
+  	if(
+  		this.x + tileW > enemy.x &&
+  		this.x < enemy.x + tileW &&
+  		this.y + tileH > enemy.y &&
+  		this.y < enemy.y + tileH
+  	){
+  		return true;
   	}
+  	else{
+  		return false;
+  	}		 	
+  },
+  attack(enemy){
   	if(this.direction.up == true && this.unsheath == true){
   		sword.draw(this.x, this.y - tileH)
+  		if(
+  			this.y - tileH < enemy.y + tileH &&
+  			this.y + tileH > enemy.y &&
+  			this.x < enemy.x + tileW &&
+  			this.x + tileW > enemy.x
+  			){
+  			console.log("kill");
+  			return kill = true;
+  		}
   	}
   	if(this.direction.left == true && this.unsheath == true){
   		sword.draw(this.x - tileW, this.y)
+  		if(
+  			this.x - tileW < enemy.x + tileW &&
+  			this.y + tileH > enemy.y &&
+  			this.x > enemy.x &&
+  			this.y < enemy.y + tileH
+  			){
+  			console.log("kill");
+  			return kill = true;
+  		}
   	}
   	if(this.direction.right == true && this.unsheath == true){
   		sword.draw(this.x + tileW, this.y)
+  		if(
+  			this.x + (2*tileW) > enemy.x &&
+  			this.x + tileW < enemy.x + tileW &&
+  			this.y + tileH > enemy.y &&
+  			this.y < enemy.y + tileH
+  			){
+  			console.log("kill");
+  			return kill = true;
+  		}
   	}
   	if(this.direction.down == true && this.unsheath == true){
   		sword.draw(this.x, this.y + tileH)
-  	}  	
+  		if(
+  			this.y + (2*tileH) > enemy.y &&
+  			this.x < enemy.x + tileW &&
+  			this.x + tileW > enemy.x &&
+  			this.y + tileH < enemy.y + tileH
+  			){
+  			console.log("kill");
+  			return kill = true;
+  		}
+  	}   	
+  },
+  startAttack(key,){
+  	if(key == ' '){
+  		this.unsheath = true;
+  	} 	
   },
   stopAttack(key){
   	if(key == ' ') this.unsheath = false;
@@ -208,7 +257,6 @@ const spawnPoints = [
 // createEnemies();
 // console.log(ghosts);
 
-
 const enemies = {
 	speed: 1,
 	x: tileW*4,
@@ -277,8 +325,7 @@ function animate() {
 	drawGame();
 	enemies.draw();
 	player.draw();
-	player.drawAttack();
-	player.attack();
+	player.attack(enemies);
 	enemies.checkCollisionWall();
 	player.checkCollisionWall();
 	if(player.checkCollisionEnemy(enemies)){
@@ -307,7 +354,7 @@ document.addEventListener('keyup', (event) => {
 
 document.addEventListener('keydown', (event) => {
 	if([' '].includes(event.key)) {
-    player.drawAttack(event.key)
+    player.startAttack(event.key)
   }
 });
 
