@@ -57,6 +57,7 @@ const grass = new Sprite("images/grass.png");
 const link = new Sprite("images/link.png");
 const dirt = new Sprite("images/dirt.png");
 const ghosts = new Sprite("images/enemies.png");
+const sword = new Sprite("images/sword.png");
 
 const player = {
 	x: tileW*8,
@@ -79,8 +80,7 @@ const player = {
 		if(this.direction.up) this.y -= this.speed;
     if(this.direction.left) this.x -= this.speed;
     if(this.direction.right) this.x += this.speed;
-    if(this.direction.down) this.y += this.speed;
-    
+    if(this.direction.down) this.y += this.speed;  
 	},
 	startDirection(key){
     if(key == 'w') this.direction.up = true;
@@ -94,9 +94,29 @@ const player = {
     if(key == 's') this.direction.down = false;
     if(key == 'd') this.direction.right = false;
   },
+  attack(){
+  	if(this.direction.up == true && this.attack == true){
+  		sword.draw(this.x, this.y - tileH)
+  	}
+  	if(this.direction.left == true && this.attack == true){
+  		sword.draw(this.x - tileW, this.y)
+  	}
+  	if(this.direction.right == true && this.attack == true){
+  		sword.draw(this.x + tileW, this.y)
+  	}
+  	if(this.direction.down == true && this.attack == true){
+  		sword.draw(this.x, this.y + tileH)
+  	}  	
+  },
+  startAttack(key){
+  	if(key == ' '){
+  		this.attack = true;
+  	}
+  },
+  stopAttack(key){
+  	if(key == ' ') this.attack = false;
+  },
   checkCollisionWall(){
-  	// let prevX = this.x;
-  	// let prevY = this.y;
   	if(this.y < tileH){
   		this.y += 3;
   		return this.aCollision = true;
@@ -116,7 +136,6 @@ const player = {
   	else{
   		return this.aCollision = false;
   	}
-
 		// for(let x = 0; x < mapH; x++){
 		// 	for(let y = 0; y < mapW; y++){
 		// 		let tileType = map[mapIndex];
@@ -132,16 +151,8 @@ const player = {
 		// 		}
 		// 	}
 		// }
-  },
-  collide(){
-  	ogPosition = this.position;
-  	this.position = this.position + this.speed;
-  	if(this.aCollision === true){
-  		this.position = ogPosition;
-  	}
-  }	
-};
-
+  }, 
+}
 
 // const enemies = {
 // 	speed: 1,
@@ -195,8 +206,8 @@ function animate() {
 	drawGame();
 	// enemies.draw();
 	player.draw();
+	player.attack();
 	player.checkCollisionWall();
-	console.log(player.aCollision);
 	window.requestAnimationFrame(animate);
 }
 animate();
@@ -217,6 +228,17 @@ document.addEventListener('keyup', (event) => {
   }
 });
 
+document.addEventListener('keydown', (event) => {
+	if([' '].includes(event.key)) {
+    player.startAttack(event.key)
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  if([' '].includes(event.key)) {
+    player.stopAttack(event.key)
+  }
+});
 
 
 
