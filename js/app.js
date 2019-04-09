@@ -90,7 +90,6 @@ const player = {
 	x: tileW*8,
 	y: tileH*10,
 	unsheath: false,
-	kill: false,
 	speed: 2, 
 	// tileY: null,
 	// tileX: null,
@@ -122,19 +121,6 @@ const player = {
     if(key == 'd') this.direction.right = false;
   },
   attack(enemy){
-  	if(
-  		this.x + tileW > enemy.x &&
-  		this.x < enemy.x + tileW &&
-  		this.y + tileH > enemy.y &&
-  		this.y < enemy.y + tileH
-  	){
-  		return true;
-  	}
-  	else{
-  		return false;
-  	}		 	
-  },
-  attack(enemy){
   	if(this.direction.up == true && this.unsheath == true){
   		sword.draw(this.x, this.y - tileH)
   		if(
@@ -144,7 +130,7 @@ const player = {
   			this.x + tileW > enemy.x
   			){
   			console.log("kill");
-  			return kill = true;
+ 				enemies.die();
   		}
   	}
   	if(this.direction.left == true && this.unsheath == true){
@@ -156,7 +142,7 @@ const player = {
   			this.y < enemy.y + tileH
   			){
   			console.log("kill");
-  			return kill = true;
+  			enemies.die();
   		}
   	}
   	if(this.direction.right == true && this.unsheath == true){
@@ -168,7 +154,7 @@ const player = {
   			this.y < enemy.y + tileH
   			){
   			console.log("kill");
-  			return kill = true;
+  			enemies.die();
   		}
   	}
   	if(this.direction.down == true && this.unsheath == true){
@@ -180,7 +166,7 @@ const player = {
   			this.y + tileH < enemy.y + tileH
   			){
   			console.log("kill");
-  			return kill = true;
+  			enemies.die();
   		}
   	}   	
   },
@@ -245,19 +231,19 @@ const spawnPoints = [
 	[10*tileW, 10*tileH]
 ];
 
-// const ghosts = []
+const ghosts = []
 
-// const createEnemies = function(){
-//  	for(let i = 0; i < 6; i++){
-
-//  		ghosts.push(Enemy(spawnPoints[i][i],
-//  		spawnPoints[i][i+1], "images/enemies.png"))
-//  	}
-// }
-// createEnemies();
-// console.log(ghosts);
+const createEnemies = function(){
+ 	for(let i = 0; i < 6; i++){
+ 		ghosts[i] = new Enemy(spawnPoints[i][0],
+ 		spawnPoints[i][1], "images/enemies.png")
+ 	}
+}
+createEnemies();
+console.log(ghosts);
 
 const enemies = {
+	alive: true,
 	speed: 1,
 	x: tileW*4,
 	y: tileH*4,
@@ -271,23 +257,21 @@ const enemies = {
 	checkCollisionWall(){
 	  if(this.y < tileH){
 	  	this.speed = -this.speed
-	  	return this.aCollision = true;
 	  }
 	  if(this.x + tileW > canvas.width - tileW){
 	  	this.speed = -this.speed
-	  	return this.aCollision = true;
 	  }
 	  if(this.y + tileH > canvas.height - tileH){
 	  	this.speed = -this.speed
-	  	return this.aCollision = true;
 	  }
 	  if(this.x + this.speed < tileH){
 	  	this.speed = -this.speed
-	  	return this.aCollision = true;
-	  }
-	  else{
-	  	return this.aCollision = false;
 	  }	  
+	},
+	die () {
+		this.alive = false;
+		this.x = 15*tileW
+		this.y = 0 
 	}
 }
 
@@ -323,7 +307,13 @@ function animate() {
 	player.move();
 	clearCanvas();
 	drawGame();
-	enemies.draw();
+	
+	if (enemies.alive) {
+		enemies.draw();
+	} else {
+
+	}
+
 	player.draw();
 	player.attack(enemies);
 	enemies.checkCollisionWall();
@@ -341,6 +331,7 @@ function clearCanvas(){
 }
 
 document.addEventListener('keydown', (event) => {
+
 	if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.startDirection(event.key)
   }
