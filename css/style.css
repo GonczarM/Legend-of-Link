@@ -1,11 +1,5 @@
-
 body { 
   background-color: lightblue;
-}
-
-#start {
-	width: 800px;
-	height: 800px;
 }
 
 header {
@@ -13,13 +7,18 @@ header {
 	justify-content: center;
 }
 
-#zelda {
-	display: none;
+#start{
+	width: 800px;
+	height: 800px;
 }
 
 main {
 	display: flex;
 	justify-content: center;
+}
+
+#zelda {
+	display: none;
 }
 
 .win {
@@ -36,12 +35,6 @@ main {
   	transform: translate(-50%, -50%);
 	text-align: center;
 	position: absolute;
-
-}
-
-.lose {
-	display: none;
-	justify-content: center;
 }
 
 #triforce {
@@ -49,8 +42,12 @@ main {
 	height: 800px;
 }
 
+.lose {
+	display: none;
+	justify-content: center;
+}
+
 #gameover {
 	width: 800px;
 	height: 800px;
 }
-

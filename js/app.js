@@ -1,21 +1,21 @@
-$(document).on('click', (event) => {
-	$('#start').hide("fade", "slow");
-	$('#zelda').css('display', 'flex');
-	intro.pause();
-	overworld.play();
-});
-
+//init canvas
 canvas = document.getElementById('zelda');
 ctx = canvas.getContext('2d');
 
+//when window finishes loading, begin intro music
+window.onload = function(){
+	intro.play();
+}
+
+//global variables
 const tileW = 30;
 const tileH = 30;
 const mapW = 16;
 const mapH = 20;
-const tSize = 30;
-const col = 20;
-const row = 16; 
-
+const Overworld = document.getElementById("overworld");
+const gameOverMusic = document.getElementById("lose");
+const intro = document.getElementById("intro");
+const gameWon = document.getElementById("win");
 const map = [
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -39,6 +39,7 @@ const map = [
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 ];
 
+//classes
 class Sprite {
 	constructor(picture){
 		this.image = new Image();
@@ -86,6 +87,7 @@ class Enemy {
 	}
 }
 
+//creating objects from classes
 const grass = new Sprite("images/grass.png");
 const dirt = new Sprite("images/dirt.png");
 const swordUp = new Sprite("images/sword up.png");
@@ -97,26 +99,14 @@ const linkBackward = new Sprite("images/link backward.png");
 const linkLeft = new Sprite("images/link left.png");
 const linkRight = new Sprite("images/link right.png");
 const wall = new Sprite("images/wall.png");
-const Overworld = document.getElementById("overworld");
-const gameOverMusic = document.getElementById("lose");
-const intro = document.getElementById("intro");
-const gameWon = document.getElementById("win");
 
-
-window.onload = function(){
-	intro.play();
-}
-
-
-
+//player object
 const player = {
 	x: tileW*8,
 	y: tileH*10,
 	unsheath: false,
 	speed: 2,
 	attackTime: 1,
-	// tileY: null,
-	// tileX: null,
 	direction: {
     up: false,
     down: false,
@@ -175,7 +165,6 @@ const player = {
 		  		this.y < enemy.y + tileH
 		  		){
 		  		ghosts[i].die();
-		  		// return;
 		  	}
 		  }
 		  if(this.direction.right == true && this.unsheath == true){
@@ -187,7 +176,6 @@ const player = {
 		  		this.y < enemy.y + tileH
 		  		){
 		  		ghosts[i].die();
-		  		// return;
 		  	}
 		  }
 		  if(this.direction.down == true && this.unsheath == true){
@@ -199,7 +187,6 @@ const player = {
 		  		this.y + tileH < enemy.y + tileH
 		  		){
 		  		ghosts[i].die();
-		  		// return;
 		  	}
 		  }
 		}  	   	
@@ -231,21 +218,6 @@ const player = {
   	if(this.x + this.speed < tileH){
   		this.x += 3;
   	}
-		// for(let x = 0; x < mapH; x++){
-		// 	for(let y = 0; y < mapW; y++){
-		// 		let tileType = map[mapIndex];
-		// 		player
-		// 			xOverlap = (this.x < tileX + tileW) &&
-		// 			(this.x + tileW > tileX)
-		// 			yOverlap = (this.y < tileY + tileH) &&
-		// 			(this.y + tileH > tileY)
-		// 			collision = xOverlap && yOverlap
-		// 			if(collision){
-		// 				this.aCollision = true;
-		// 			}
-		// 		}
-		// 	}
-		// }
   },
   checkCollisionEnemy(enemy) {
   	if(
@@ -270,6 +242,7 @@ const player = {
   // }
 }
 
+//enemies spawn, array and creation
 const spawnPoints = [
 	[4*tileW, 4*tileH],
 	[4*tileW, 10*tileH],
@@ -280,12 +253,6 @@ const spawnPoints = [
 ];
 
 const ghosts = [];
-const ghost1 = [];
-const ghost2 = [];
-const ghost3 = [];
-const ghost4 = [];
-const ghost5 = [];
-const ghost6 = [];
 
 function createEnemies(){
  	for(let i = 0; i < 6; i++){
@@ -295,6 +262,7 @@ function createEnemies(){
 }
 createEnemies();
 
+// drawing the canvas board and clearing it
 function drawGame(){
 	mapIndex = 0;
 	for(let y = 0; y < mapH;y++){
@@ -315,20 +283,11 @@ function drawGame(){
 	}
 };
 
-function gameOver() {
-	$('#zelda').css('display', 'none')
-  $('.lose').show('fade', 1000)
-  overworld.pause();
-  gameOverMusic.play();
-}
-
-function youWin(){
-	$('#zelda').css('display', 'none')
-	$('.win').show('fade', 2000)
-	overworld.pause();
-	gameWon.play();	
+function clearCanvas(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 } 
 
+// loop for game
 function animate() {
 	for(let i = 0; i < 6; i++){
 		ghosts[i].move();
@@ -355,7 +314,6 @@ function animate() {
 			return;
 		}
 	}
-
 	// if(player.slayedThemAll()){
 	// 	youWin();
 	// 	return;
@@ -364,12 +322,30 @@ function animate() {
 }
 animate();
 
-function clearCanvas(){
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+//the end of the game screens
+function gameOver() {
+	$('#zelda').css('display', 'none')
+  $('.lose').show('fade', 1000)
+  overworld.pause();
+  gameOverMusic.play();
 }
 
-document.addEventListener('keydown', (event) => {
+function youWin(){
+	$('#zelda').css('display', 'none')
+	$('.win').show('fade', 2000)
+	overworld.pause();
+	gameWon.play();	
+}
 
+// event listeners
+$(document).on('click', (event) => {
+	$('#start').hide("fade", "slow");
+	$('#zelda').css('display', 'flex');
+	intro.pause();
+	overworld.play();
+});
+
+document.addEventListener('keydown', (event) => {
 	if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.startDirection(event.key)
     player.stopAttack();
@@ -395,8 +371,3 @@ document.addEventListener('keyup', (event) => {
     player.stopAttack(event.key)
   }
 });
-
-
-
-
-
