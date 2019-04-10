@@ -51,11 +51,12 @@ class Sprite {
 };
 
 class Enemy {
-	constructor(x, y, picture){
+	constructor(x, y, id, picture){
 		this.alive = true;
 		this.speed = 2;
 		this.image = new Image();
 		this.image.src = picture;
+		this.id = id
 		this.x = x;
 		this.y = y;
 	}
@@ -154,6 +155,7 @@ const player = {
 		  		this.x + tileW > enemy.x
 		  		){
 		 			ghosts[i].die();
+		 			console.log(ghosts.id);
 		  	}
 		  }
 		  if(this.direction.left == true && this.unsheath == true){
@@ -232,14 +234,11 @@ const player = {
   		return false;
   	}
   },
-  // slayedThemAll(){
-  // 	if(ghosts.every(ghosts.alive == false)){
-  // 		return true;
-  // 	}
-  // 	else{
-  // 		return false;
-  // 	}
-  // }
+  slayedThemAll(){
+  	if(ghosts.every(ghosts.alive == false)){
+  		return true;
+  	}
+  }
 }
 
 //enemies spawn, array and creation
@@ -257,7 +256,7 @@ const ghosts = [];
 function createEnemies(){
  	for(let i = 0; i < 6; i++){
  		ghosts[i] = new Enemy(spawnPoints[i][0],
- 		spawnPoints[i][1], "images/enemies.png")
+ 		spawnPoints[i][1], [i], "images/enemies.png")
  	}
 }
 createEnemies();
@@ -314,10 +313,10 @@ function animate() {
 			return;
 		}
 	}
-	// if(player.slayedThemAll()){
-	// 	youWin();
-	// 	return;
-	// }
+	if(player.slayedThemAll()){
+		youWin();
+		return;
+	}
 	window.requestAnimationFrame(animate);
 }
 animate();
@@ -328,6 +327,9 @@ function gameOver() {
   $('.lose').show('fade', 1000)
   overworld.pause();
   gameOverMusic.play();
+  $(document).on('click', (event) => {
+		location.reload();
+	})
 }
 
 function youWin(){
@@ -335,6 +337,9 @@ function youWin(){
 	$('.win').show('fade', 2000)
 	overworld.pause();
 	gameWon.play();	
+	$(document).on('click', (event) => {
+		location.reload();
+	})
 }
 
 // event listeners
