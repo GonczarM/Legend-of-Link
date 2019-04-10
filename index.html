@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<title>Legend of Link</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="icon" href="images/triforce.png">
 </head>
 <body>
-	<h1>Use WASD to move link around the map, use your sword to kill the ghosts with spacebar. Don't let them touch you or your dead.</h1>
-	<canvas id="zelda" width="480" height="600"></canvas>
+	<header>
+		<img src="images/start.png" id="start">
+	</header>
+	<main>
+		<canvas id="zelda" width="480" height="600"></canvas>
+		<div class="win">
+			<h1>Thanks Link, you're a hero of Hyrule.
+			Finally, peace return to Hyrule.</h1>
+			<img src="images/triforceWin.png" id="triforce">
+		</div>
+		<div class="lose">
+			<img src="images/gameover.png" id="gameover">
+		</div>
+	</main>
 
 <script type="text/javascript" src="js/app.js"></script>
-
-
 </body>
 </html>
