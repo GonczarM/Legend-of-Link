@@ -1,14 +1,12 @@
 
-/*html { 
-  background: url(../images/great wave.png); 
-  background-size: cover;
-}*/
+body { 
+  background-color: lightblue;
+}
 
 #start {
 	width: 800px;
 	height: 800px;
 }
-
 
 header {
 	display: flex;

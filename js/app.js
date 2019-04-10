@@ -1,6 +1,8 @@
 $(document).on('click', (event) => {
 	$('#start').hide("fade", "slow");
 	$('#zelda').css('display', 'flex');
+	intro.pause();
+	overworld.play();
 });
 
 canvas = document.getElementById('zelda');
@@ -95,6 +97,17 @@ const linkBackward = new Sprite("images/link backward.png");
 const linkLeft = new Sprite("images/link left.png");
 const linkRight = new Sprite("images/link right.png");
 const wall = new Sprite("images/wall.png");
+const Overworld = document.getElementById("overworld");
+const gameOverMusic = document.getElementById("lose");
+const intro = document.getElementById("intro");
+const gameWon = document.getElementById("win");
+
+
+window.onload = function(){
+	intro.play();
+}
+
+
 
 const player = {
 	x: tileW*8,
@@ -305,11 +318,15 @@ function drawGame(){
 function gameOver() {
 	$('#zelda').css('display', 'none')
   $('.lose').show('fade', 1000)
+  overworld.pause();
+  gameOverMusic.play();
 }
 
 function youWin(){
 	$('#zelda').css('display', 'none')
-	$('.win').show('fade', 2000)	
+	$('.win').show('fade', 2000)
+	overworld.pause();
+	gameWon.play();	
 } 
 
 function animate() {

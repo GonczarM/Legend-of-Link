@@ -10,16 +10,28 @@
 </head>
 <body>
 	<header>
+		<audio id="intro">
+			<source src="Sounds/Intro.mp3" type="audio/mpeg">
+		</audio>
 		<img src="images/start.png" id="start">
 	</header>
 	<main>
+		<audio id="overworld">
+			<source src="Sounds/Overworld.mp3" type="audio/mpeg">
+		</audio>
 		<canvas id="zelda" width="480" height="600"></canvas>
 		<div class="win">
+			<audio id="win">
+				<source src="Sounds/Triforce.mp3" type="audio/mpeg">
+			</audio>
 			<h1>Thanks Link, you're a hero of Hyrule.
-			Finally, peace return to Hyrule.</h1>
+			Finally, peace returns to Hyrule.</h1>
 			<img src="images/triforceWin.png" id="triforce">
 		</div>
 		<div class="lose">
+			<audio id="lose">
+				<source src="Sounds/Game Over.mp3" type="audio/mpeg">
+			</audio>
 			<img src="images/gameover.png" id="gameover">
 		</div>
 	</main>
