@@ -145,59 +145,58 @@ const player = {
     if(key == 'd') this.direction.right = false;
   },
   attack(enemy){
-		 	if(this.direction.up == true && this.unsheath == true){
-		  	swordUp.draw(this.x, this.y - tileH)
-		  	if(
-		  		this.y - tileH < enemy.y + tileH &&
-		  		this.y + tileH > enemy.y &&
-		  		this.x < enemy.x + tileW &&
-		  		this.x + tileW > enemy.x
-		  		){
-		  		enemyhit.play();
-		  		enemy.die();
-		  		deadGhosts.push(enemy) 
-		  	}
-		  }
-		  if(this.direction.left == true && this.unsheath == true){
-		  	swordLeft.draw(this.x - tileW, this.y)
-		  	if(
-		  		this.x - tileW < enemy.x + tileW &&
-		  		this.y + tileH > enemy.y &&
-		  		this.x > enemy.x &&
-		  		this.y < enemy.y + tileH
-		  		){
-		  		enemyhit.play();
-		  		enemy.die();
-		  		deadGhosts.push(enemy);
-		  	}
-		  }
-		  if(this.direction.right == true && this.unsheath == true){
-		  	swordRight.draw(this.x + tileW, this.y)
-		  	if(
-		  		this.x + (2*tileW) > enemy.x &&
-		  		this.x + tileW < enemy.x + tileW &&
-		  		this.y + tileH > enemy.y &&
-		  		this.y < enemy.y + tileH
-		  		){
-		  		enemyhit.play();
-		  		enemy.die();
-		  		deadGhosts.push(enemy);
-		  	}
-		  }
-		  if(this.direction.down == true && this.unsheath == true){
-		  	swordDown.draw(this.x, this.y + tileH)
-		  	if(
-		  		this.y + (2*tileH) > enemy.y &&
-		  		this.x < enemy.x + tileW &&
-		  		this.x + tileW > enemy.x &&
-		  		this.y + tileH < enemy.y + tileH
-		  		){
-		  		enemyhit.play();
-		  		enemy.die();
-		  		deadGhosts.push(enemy);
-		  	}
-		  }
-		  	   	
+		if(this.direction.up == true && this.unsheath == true){
+			swordUp.draw(this.x, this.y - tileH)
+			if(
+				this.y - tileH < enemy.y + tileH &&
+				this.y + tileH > enemy.y &&
+				this.x < enemy.x + tileW &&
+				this.x + tileW > enemy.x
+				){
+				enemyhit.play();
+				enemy.die();
+				deadGhosts.push(enemy) 
+			}
+		}
+		if(this.direction.left == true && this.unsheath == true){
+			swordLeft.draw(this.x - tileW, this.y)
+			if(
+				this.x - tileW < enemy.x + tileW &&
+				this.y + tileH > enemy.y &&
+				this.x > enemy.x &&
+				this.y < enemy.y + tileH
+				){
+				enemyhit.play();
+				enemy.die();
+				deadGhosts.push(enemy);
+			}
+		}
+		if(this.direction.right == true && this.unsheath == true){
+			swordRight.draw(this.x + tileW, this.y)
+			if(
+				this.x + (2*tileW) > enemy.x &&
+				this.x + tileW < enemy.x + tileW &&
+				this.y + tileH > enemy.y &&
+				this.y < enemy.y + tileH
+				){
+				enemyhit.play();
+				enemy.die();
+				deadGhosts.push(enemy);
+			}
+		}
+		if(this.direction.down == true && this.unsheath == true){
+			swordDown.draw(this.x, this.y + tileH)
+			if(
+				this.y + (2*tileH) > enemy.y &&
+				this.x < enemy.x + tileW &&
+				this.x + tileW > enemy.x &&
+				this.y + tileH < enemy.y + tileH
+				){
+				enemyhit.play();
+				enemy.die();
+				deadGhosts.push(enemy);
+			}
+		}			   	
   },
   startAttack(key){
   	if(key == ' '){
@@ -250,15 +249,15 @@ const spawnPoints = [
 	[7*tileW, 4*tileH],
 	[11*tileW, 4*tileH],
 	[11*tileW, 10*tileH],
-	[11*tileW, 15*tileH],
-	[7*tileW, 15*tileH]
-];
+	[11*tileW, 16*tileH],
+	[7*tileW, 15*tileH],
+	];
 
 const ghosts = [];
 const deadGhosts = [];
 
 function createEnemies(){
- 	for(let i = 0; i < 8; i++){
+ 	for(let i = 0; i < spawnPoints.length; i++){
  		ghosts[i] = new Enemy(spawnPoints[i][0],
  		spawnPoints[i][1], i, "images/enemies.png")
  	}
@@ -292,31 +291,32 @@ function clearCanvas(){
 
 // loop for game
 function animate() {
-	for(let i = 0; i < 8; i++){
+	for(let i = 0; i < ghosts.length; i++){
 		ghosts[i].move();
 	}
 	clearCanvas();
 	drawGame();
 	player.draw();
 	player.move();
-	for(let i = 0; i < 8; i++){
+	for(let i = 0; i < ghosts.length; i++){
 		player.attack(ghosts[i]);
 	}
-	for(let i = 0; i < 8; i++){
+	for(let i = 0; i < ghosts.length; i++){
 		if (ghosts[i].alive) {
 			ghosts[i].draw();
 		}
 	}
-	for(let i = 0; i < 8; i++){
+	for(let i = 0; i < ghosts.length; i++){
 		ghosts[i].checkCollisionWall();
 	}
 	player.checkCollisionWall();
-	for(let i = 0; i < 8; i++){
+	for(let i = 0; i < ghosts.length; i++){
 		if(player.checkCollisionEnemy(ghosts[i])){
 			gameOver();
 			return;
 		}
 	}
+	console.log(deadGhosts);
 	if(deadGhosts.length >= 8){
 		youWin();
 		return;
