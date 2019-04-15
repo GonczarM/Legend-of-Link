@@ -2,10 +2,10 @@
 canvas = document.getElementById('zelda');
 ctx = canvas.getContext('2d');
 
-//when window finishes loading, begin intro music
-window.onload = function(){
-	intro.play();
-}
+//when window finishes loading, should... begin intro music
+// Window.onload = function(){
+// 	intro.play();
+// }
 
 //global variablesws
 const tileW = 30;

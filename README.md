@@ -5,13 +5,14 @@
 ### MVP
 
 1. User spawns in middle of map
-2. User can move, with specific keyboard keys, around the designated area of the map
+2. User can move, with specific keyboard keys WASD, around the designated area of the map
 3. Enemies spawn in specific locations and move in a square around map
 4. If User collides with an enemy, user dies and game ends
-5. User attacks enemies with sword by hitting a specific key
-6. an attack extends users hitbox in direction user faces
-7. if enemy is in the extended hitbox of users attack, enemy is destroyed
+5. User attacks enemies with sword by hitting spacebar
+6. an attack extends sword in direction user moves
+7. if enemy is in the sword, enemy is destroyed
 8. If user destroyes all enemies on screen user wins
+9. sound for music, and different animation
 
 ### Extras
 
@@ -21,7 +22,6 @@
 4. if user loses all hearts game ends
 5. if user defeats all enemies a boss appears
 6. boss follows user around trying to collide with user to deal damage
-7. sound for music, and different animation
 
 ### Stretch
 
