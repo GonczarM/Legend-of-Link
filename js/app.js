@@ -7,7 +7,7 @@ window.onload = function(){
 	intro.play();
 }
 
-//global variables
+//global variablesws
 const tileW = 30;
 const tileH = 30;
 const mapW = 16;
@@ -81,7 +81,7 @@ class Enemy {
 	  	this.speed = -this.speed
 	  }	  
 	}
-	die () {
+	die(){
 		this.alive = false;
 		this.x = 15*tileW;
 		this.y = 0;
@@ -144,6 +144,7 @@ const player = {
     if(key == 's') this.direction.down = false;
     if(key == 'd') this.direction.right = false;
   },
+  //change sword to seperate sprite for one collision detection
   attack(enemy){
 		if(this.direction.up == true && this.unsheath == true){
 			swordUp.draw(this.x, this.y - tileH)
@@ -316,7 +317,6 @@ function animate() {
 			return;
 		}
 	}
-	console.log(deadGhosts);
 	if(deadGhosts.length >= 8){
 		youWin();
 		return;
