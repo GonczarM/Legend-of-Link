@@ -1,5 +1,13 @@
 # Legend-of-Link
 
+https://gumballg.github.io/Legend-of-Link/
+
+This was the first project I was able to build using only JavaScript. I grew up playing many iterations of Legend of Zelda and wanted to emulate it. This game lets you control and move Link around the map. You share the map with many ghosts that will attack when you cross their path. You can, however, try and defeat the enemies by swinging your sword at them.
+
+## Technology 
+
+This application us built strictly using JavaScript, HTML, and CSS. The libraries I used to help make it possible were jQuery and Canvas
+
 ## User Stories
 
 ### MVP
