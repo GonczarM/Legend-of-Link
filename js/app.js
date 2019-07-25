@@ -334,6 +334,9 @@ function gameOver() {
   $(document).on('click', (event) => {
 		location.reload();
 	})
+	$(document).on('touch', (event) => {
+		location.reload();
+	})
 }
 
 function youWin(){
@@ -342,6 +345,9 @@ function youWin(){
 	overworld.pause();
 	gameWon.play();	
 	$(document).on('click', (event) => {
+		location.reload();
+	})
+	$(document).on('touch', (event) => {
 		location.reload();
 	})
 }
@@ -353,6 +359,13 @@ $(document).on('click', (event) => {
 	intro.pause();
 	overworld.play();
 });
+
+$(document).on('touch', (event) => {
+	$('#start').hide("fade", "slow");
+	$('#zelda').css('display', 'block');
+	intro.pause();
+	overworld.play();
+})
 
 document.addEventListener('keydown', (event) => {
 	console.log(event.key);
