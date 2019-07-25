@@ -133,16 +133,16 @@ const player = {
     if(this.direction.down) this.y += this.speed;  
 	},
 	startDirection(key){
-    if(key == 'w') this.direction.up = true;
-    if(key == 'a') this.direction.left = true;
-    if(key == 's') this.direction.down = true;
-    if(key == 'd') this.direction.right = true;
+    if(key == 'w' || key == 'upPress') this.direction.up = true;
+    if(key == 'a' || key == 'leftPress') this.direction.left = true;
+    if(key == 's' || key == 'downPress') this.direction.down = true;
+    if(key == 'd' || key == 'rightPress') this.direction.right = true;
 	},
   stopDirection(key) {
-    if(key == 'w') this.direction.up = false;
-    if(key == 'a') this.direction.left = false;
-    if(key == 's') this.direction.down = false;
-    if(key == 'd') this.direction.right = false;
+    if(key == 'w' || key == 'upRelease') this.direction.up = false;
+    if(key == 'a' || key == 'leftRelease') this.direction.left = false;
+    if(key == 's' || key == 'downRelease') this.direction.down = false;
+    if(key == 'd' || key == 'rightRelease') this.direction.right = false;
   },
   //change sword to seperate sprite for one collision detection
   attack(enemy){
@@ -200,7 +200,7 @@ const player = {
 		}			   	
   },
   startAttack(key){
-  	if(key == ' '){
+  	if(key == ' ' || key == 'attack'){
   		this.unsheath = true;
   	}
   	this.timerHandle = setInterval(() => {
@@ -349,12 +349,13 @@ function youWin(){
 // event listeners
 $(document).on('click', (event) => {
 	$('#start').hide("fade", "slow");
-	$('#zelda').css('display', 'flex');
+	$('#zelda').css('display', 'block');
 	intro.pause();
 	overworld.play();
 });
 
 document.addEventListener('keydown', (event) => {
+	console.log(event.key);
 	if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.startDirection(event.key)
     player.stopAttack();
@@ -366,6 +367,62 @@ document.addEventListener('keyup', (event) => {
     player.stopDirection(event.key)
   }
 });
+
+$("#up").on('touchstart', (event) => {
+	const upPress = 'upPress'
+	player.startDirection(upPress)
+	player.stopAttack()
+})
+
+$("#down").on('touchstart', (event) => {
+	const downPress =  'downPress'
+	player.startDirection(downPress)
+	player.stopAttack()
+})
+
+$("#left").on('touchstart', (event) => {
+	const leftPress = 'leftPress'
+	player.startDirection(leftPress)
+	player.stopAttack()
+})
+
+$("#right").on('touchstart', (event) => {
+	const rightPress = 'rightPress'
+	player.startDirection(rightPress)
+	player.stopAttack()
+})
+
+$("#up").on('touchend', (event) => {
+	const upRelease = 'upRelease'
+	player.stopDirection(upRelease)
+})
+
+$("#down").on('touchend', (event) => {
+	const downRelease = 'downRelease'
+	player.stopDirection(downRelease)
+})
+
+$("#left").on('touchend', (event) => {
+	const leftRelease = 'leftRelease'
+	player.stopDirection(leftRelease)
+})
+
+$("#right").on('touchend', (event) => {
+	const rightRelease = 'rightRelease'
+	player.stopDirection(rightRelease)
+})
+
+$("#attack").on('touchstart', (event) => {
+	const attack = 'attack'
+	if(!player.unsheath) {
+		player.startAttack(attack)
+	}
+})
+
+$("#attack").on('touchstop', (event) => {
+		const sheath = 'sheath'
+		player.stopAttack(sheath)
+})
 
 document.addEventListener('keydown', (event) => {
 	if([' '].includes(event.key)) {
