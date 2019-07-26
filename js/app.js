@@ -477,7 +477,6 @@ $("#right").on('touchend', (event) => {
 
 $("#attack").on('touchstart', (event) => {
 	const attack = 'attack'
-	event.preventDefault()
 	if(!player.unsheath) {
 		player.startAttack(attack)
 	}
@@ -485,7 +484,6 @@ $("#attack").on('touchstart', (event) => {
 
 $("#attack").on('touchstop', (event) => {
 		const sheath = 'sheath'
-		event.preventDefault()
 		player.stopAttack(sheath)
 })
 
@@ -508,3 +506,12 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
+
+const lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
