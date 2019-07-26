@@ -96,10 +96,10 @@ h1{
 
 .buttons{
 		display: block;
-		margin-top: 100px;
+		margin-top: 50px;
 		margin-left: 50px;
 	}
-	
+
 button{
 	border-radius: 5px;
 	border: none;
@@ -147,6 +147,7 @@ button{
 
 @media screen and (max-width: 1080px){
 	#zelda, #triforce, #gameover, #intro, .screenOff{
-		width: 100%;
+		width: 75%;
+
 	}
 }
