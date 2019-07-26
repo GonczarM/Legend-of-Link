@@ -8,20 +8,12 @@ body {
   background-color: rgb(238,238,222);
 }
 
-#on{
-	background-color: transparent;
-	border: solid black 2px;
-	margin: 15px 0 15px 10%;
-	padding: 5px;
-	font-size: 40px;
-	border-radius: 5px;
-}
-
 .screen{
 	background-color: rgb(150,150,160);
 	border-radius: 20px;
 	width: 95%;
 	margin: 0 auto;
+	margin-top: 2.5%;
 	padding: 30px;
 }
 
@@ -97,7 +89,7 @@ h1{
 .buttons{
 		display: block;
 		margin-top: 50px;
-		margin-left: 50px;
+		margin-left: 100px;
 	}
 
 button{
@@ -126,7 +118,7 @@ button{
 #attack{
 	display: inline;
 	position: absolute;
-	right: 5%;
+	right: 15%;
 	border-radius: 75px;
 	height: 125px;
 	width: 125px;
@@ -135,12 +127,19 @@ button{
 	font-size: 50px;
 }
 
-#start{
-	margin-left: 50%;
+#on, #start{
 	margin-top: 50px;
 	width: 200px;
 	height: 75px;
 	background-color: rgb(150,150,160)
 	color: rgb(10,50,180);
 	font-size: 50px;
+}
+
+#on{
+	margin-left: 35%;
+}
+
+#start{
+	margin-left: 50px;
 }
