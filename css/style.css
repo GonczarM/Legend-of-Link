@@ -11,9 +11,9 @@ body {
 #on{
 	background-color: transparent;
 	border: solid black 2px;
-	margin: 10px 0 10px 10%;
+	margin: 15px 0 15px 10%;
 	padding: 5px;
-	font-size: 30px;
+	font-size: 40px;
 	border-radius: 5px;
 }
 
@@ -109,18 +109,18 @@ button{
 
 #up, #down{
 	display: block;
-	height: 200px;
-	width: 150px;
-	margin-left: 200px;
+	height: 150px;
+	width: 125px;
+	margin-left: 150px;
 }
 
 #left, #right{
-	height: 150px;
-	width: 200px;
+	height: 125px;
+	width: 150px;
 }
 
 #left{
-	margin-right: 145px;
+	margin-right: 120px;
 }
 
 #attack{
@@ -128,26 +128,19 @@ button{
 	position: absolute;
 	right: 5%;
 	border-radius: 75px;
-	height: 150px;
-	width: 150px;
+	height: 125px;
+	width: 125px;
 	background-color: red;
 	color: rgb(10,50,180);
 	font-size: 50px;
 }
 
 #start{
-	margin-left: 60%;
+	margin-left: 50%;
 	margin-top: 50px;
 	width: 200px;
 	height: 75px;
 	background-color: rgb(150,150,160)
 	color: rgb(10,50,180);
 	font-size: 50px;
-}
-
-@media screen and (max-width: 1080px){
-	#zelda, #triforce, #gameover, #intro, .screenOff{
-		width: 75%;
-
-	}
 }
