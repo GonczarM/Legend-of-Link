@@ -96,7 +96,7 @@ const linkBackward = new Sprite("images/link backward.png");
 const linkLeft = new Sprite("images/link left.png");
 const linkRight = new Sprite("images/link right.png");
 const attackForward = new Sprite("images/attackForward.png");
-const attackBackward = new Sprite("images/attackBack.png");
+const attackBackward = new Sprite("images/attackBackward.png");
 const attackLeft = new Sprite("images/attackLeft.png");
 const attackRight = new Sprite("images/attackRight.png");
 
