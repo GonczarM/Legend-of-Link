@@ -8,10 +8,6 @@ body {
   background-color: rgb(238,238,222);
 }
 
-canvas{
-	border: black solid 1px;
-}
-
 .screen{
 	background-color: rgb(150,150,160);
 	border-radius: 20px;
@@ -19,12 +15,13 @@ canvas{
 	margin: 0 auto;
 	margin-top: 2.5%;
 	padding: 30px;
+	text-align: center;
 }
 
 .screenOff{
 	border-radius: 5px;
 	height: 600px;
-	width: 480px;
+	width: 850px;
 	background-color: rgb(150,175,65);
 	margin: 0 auto;
 }
@@ -35,11 +32,13 @@ canvas{
 }
 
 .intro img{
+	border-radius: 5px;
 	height: 600px;
-	width: 480px;
+	width: 850px;
 }
 
 #zelda {
+	border-radius: 5px;
 	margin: 0 auto;
 	display: none;
 }
@@ -61,8 +60,9 @@ canvas{
 }
 
 #triforce {
+	border-radius: 5px;
 	height: 600px;
-	width: 480px;
+	width: 850px;
 }
 
 .lose {
@@ -71,8 +71,9 @@ canvas{
 }
 
 #gameover {
+	border-radius: 5px;
 	height: 600px;
-	width: 480px;
+	width: 850px;
 }
 
 h1{

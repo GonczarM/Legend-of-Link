@@ -40,7 +40,7 @@ class Sprite {
 class Enemy {
 	constructor(x, y, id, picture){
 		this.alive = true;
-		this.speed = 2;
+		this.speed = 3;
 		this.image = new Image();
 		this.image.src = picture;
 		this.id = id
@@ -101,7 +101,7 @@ const player = {
 	x: tileW*1,
 	y: tileH*3,
 	unsheath: false,
-	speed: 2,
+	speed: 3,
 	attackTime: 1,
 	direction: {
     up: false,
@@ -346,54 +346,74 @@ animate();
 
 //the end of the game screens
 function gameOver() {
-	$('#zelda').css('display', 'none')
-  $('.lose').show('fade', 1000)
+	$('#zelda').hide()
+  $('.lose').show();
   overworld.pause();
   gameOverMusic.play();
-  $(document).on('click', (event) => {
+  $("#on").attr("disabled", false);
+  $("#start").attr("disabled", false);
+  $('#start').on('click', (event) => {
 		location.reload();
 	})
 	$('#start').on('touchstart', (event) => {
+		location.reload();
+	})
+	$('#on').on('click', (event) => {
+		location.reload();
+	})
+	$('#on').on('touchstart', (event) => {
 		location.reload();
 	})
 }
 
 function youWin(){
-	$('#zelda').css('display', 'none')
-	$('.win').show('fade', 1000)
+	$('#zelda').hide()
+	$('.win').show();
 	overworld.pause();
 	gameWon.play();	
-	$(document).on('click', (event) => {
+	$("#on").attr("disabled", false);
+	$("#start").attr("disabled", false);
+  $('#start').on('click', (event) => {
 		location.reload();
 	})
 	$('#start').on('touchstart', (event) => {
 		location.reload();
 	})
+	$('#on').on('click', (event) => {
+		location.reload();
+	})
+	$('#on').on('touchstart', (event) => {
+		location.reload();
+	})
 }
 
 // event listeners
+
 $('#on').on('click', (event) => {
-	$('.screenOff').css("display", "none");
-	$('.intro').show('fade', 1000);
+	$('.screenOff').hide();
+	$('.intro').show();
+	$("#on").attr("disabled", true);
 	intro.play();
 });
 
 $('#on').on('touchstart', (event) => {
-	$('.screenOff').css("display", "none");
-	$('.intro').show('fade', 1000);
+	$('.screenOff').hide();
+	$('.intro').show();
 	intro.play();
 })
 
-$('.intro').on('click', (event) => {
-	$('.intro').css("display", "none");
-	$('#zelda').css('display', 'block');
+$('#start').on('click', (event) => {
+	$('.intro').hide();
+	$('#zelda').show();;
+	$("#start").attr("disabled", true);
 	intro.pause();
 	overworld.play();
 });
 
 $('#start').on('touchstart', (event) => {
-	$('.intro').css("display", "none");
-	$('#zelda').css('display', 'block');
+	$('.intro').hide();
+	$('#zelda').show();;
+	$("#start").attr("disabled", true);
 	intro.pause();
 	overworld.play();
 })
@@ -478,5 +498,11 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
   if([' '].includes(event.key)) {
     player.stopAttack(event.key)
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if(e.keyCode == 32 && e.target == document.body) {
+    e.preventDefault();
   }
 });
