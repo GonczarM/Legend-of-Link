@@ -2,56 +2,29 @@ body {
   background-color: lightblue;
 }
 
-header {
-	display: flex;
-	justify-content: center;
+header{
+	text-align: center;
 }
 
 #start{
-	width: 800px;
-	height: 800px;
-}
-
-main {
-	display: flex;
-	justify-content: center;
+	height: 600px;
+	width: 480px;
+	margin: 0 auto;
 }
 
 #zelda {
+	margin: 0 auto;
 	display: none;
 }
 
-button{
-	border-radius: 5px;
-	border: none;
-	background-color: black;
-	color: gray;
-}
-
-#up, #down{
-	display: inline-block;
-	height: 50px;
-	width: 30px;
-}
-
-#left, #right{
-	height: 30px;
-	width: 50px;
-}
-
-#attack{
-	display: inline-block;
-	border-radius: 30px;
-	height: 50px;
-	width: 50px;
-	background-color: red;
-	color: black;
+.buttons{
+	display: none;
 }
 
 .win {
 	position: relative;
 	display: none;
-	justify-content: center;
+	text-align: center;
 }
 
 .win h1 {
@@ -65,20 +38,57 @@ button{
 }
 
 #triforce {
-	width: 800px;
-	height: 800px;
+	height: 600px;
+	width: 480px;
 }
 
 .lose {
 	display: none;
-	justify-content: center;
+	text-align: center;
 }
 
 #gameover {
-	width: 800px;
-	height: 800px;
+	height: 600px;
+	width: 480px;
 }
 
 .instructions{
 	background-color: white;
+}
+
+@media screen and (max-width: 1080px){
+	.buttons{
+		display: block;
+		text-align: center;
+	}
+	button{
+		border-radius: 5px;
+		border: none;
+		background-color: black;
+		color: gray;
+	}
+
+	#up, #down{
+		display: block;
+		margin: 0 auto;
+		height: 100px;
+		width: 70px;
+	}
+
+	#left, #right{
+		margin: 0 35px;
+		height: 70px;
+		width: 100px;
+	}
+
+	#attack{
+		display: inline;
+		position: absolute;
+		right: 20%;
+		border-radius: 50px;
+		height: 70px;
+		width: 70px;
+		background-color: red;
+		color: black;
+	}
 }

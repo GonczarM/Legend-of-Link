@@ -354,7 +354,7 @@ function youWin(){
 
 // event listeners
 $(document).on('click', (event) => {
-	$('#start').hide("fade", "slow");
+	$('#start').css("display", "none");
 	$('#zelda').css('display', 'block');
 	intro.pause();
 	overworld.play();
