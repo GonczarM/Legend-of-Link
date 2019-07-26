@@ -6,7 +6,6 @@
 
 body { 
   background-color: rgb(238,238,222);
-  touch-action: manipulation;
 }
 
 .screen{
