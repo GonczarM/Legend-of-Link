@@ -96,10 +96,11 @@ h1{
 }
 
 .buttons{
-		display: block;
-		margin-top: 50px;
-		margin-left: 75px;
-	}
+	display: block;
+	margin-top: 50px;
+	margin-left: 75px;
+	touch-action: none;
+}
 
 button{
 	border-radius: 5px;
