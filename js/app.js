@@ -3,35 +3,27 @@ canvas = document.getElementById('zelda');
 ctx = canvas.getContext('2d');
 
 //global variablesws
-const tileW = 30;
-const tileH = 30;
-const mapW = 16;
-const mapH = 20;
+const tileW = 50;
+const tileH = 50;
+const mapW = 17;
+const mapH = 12;
 const Overworld = document.getElementById("overworld");
 const gameOverMusic = document.getElementById("lose");
 const intro = document.getElementById("intro");
 const gameWon = document.getElementById("win");
 const map = [
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-	1,0,2,0,0,0,2,2,2,0,2,2,2,2,0,1,
-	1,0,2,0,0,0,2,0,0,0,2,0,0,0,0,1,
-	1,0,2,0,0,0,2,2,0,0,2,0,2,2,0,1,
-	1,0,2,0,0,0,2,0,0,0,2,0,0,2,0,1,
-	1,0,2,2,2,0,2,2,2,0,2,2,2,2,0,1,
-	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-	1,0,0,0,2,2,2,0,0,2,2,2,0,0,0,1,
-	1,0,0,0,2,0,2,0,0,2,0,0,0,0,0,1,
-	1,0,0,0,2,0,2,0,0,2,2,0,0,0,0,1,
-	1,0,0,0,2,2,2,0,0,2,0,0,0,0,0,1,
-	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-	1,0,2,2,2,0,2,2,2,2,0,2,0,0,0,1,
-	1,0,0,0,2,0,2,0,0,0,0,2,0,0,0,1,
-	1,0,0,2,0,0,2,2,2,0,0,2,0,0,0,1,
-	1,0,2,0,0,0,2,0,0,0,0,2,0,0,0,1,
-	1,0,2,2,2,0,2,2,2,2,0,2,2,2,0,1,
-	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,
+	4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	4,0,10,10,0,0,0,0,0,0,0,0,0,10,10,0,2,
+	9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	4,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,2,
+	4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	4,0,0,0,0,0,0,10,10,10,0,0,0,0,0,0,2,
+	4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	4,0,10,10,0,0,0,0,0,0,0,0,0,10,10,0,2,
+	4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	8,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,7,
 ];
 
 //classes
@@ -78,14 +70,23 @@ class Enemy {
 	}
 	die(){
 		this.alive = false;
-		this.x = 15*tileW;
+		this.x = 17*tileW;
 		this.y = 0;
 	}
 }
 
 //creating objects from classes
-const grass = new Sprite("images/grass.png");
-const dirt = new Sprite("images/dirt.png");
+const backWall = new Sprite("images/backWall.png");
+const frontWall = new Sprite("images/frontWall.png");
+const leftWall = new Sprite("images/leftWall.png");
+const rightWall = new Sprite("images/rightWall.png");
+const door = new Sprite("images/door.png");
+const floor = new Sprite("images/floor.png");
+const bottomLeft = new Sprite("images/bottomLeft.png");
+const bottomRight = new Sprite("images/bottomRight.png");
+const topRight = new Sprite("images/topRight.png");
+const topLeft = new Sprite("images/topLeft.png");
+const wall = new Sprite("images/wall.png");
 const swordUp = new Sprite("images/sword up.png");
 const swordDown = new Sprite("images/sword down.png");
 const swordLeft = new Sprite("images/sword left.png");
@@ -94,12 +95,11 @@ const linkForward = new Sprite("images/link forward.png");
 const linkBackward = new Sprite("images/link backward.png");
 const linkLeft = new Sprite("images/link left.png");
 const linkRight = new Sprite("images/link right.png");
-const wall = new Sprite("images/wall.png");
 
 //player object
 const player = {
-	x: tileW*8,
-	y: tileH*10,
+	x: tileW*1,
+	y: tileH*3,
 	unsheath: false,
 	speed: 2,
 	attackTime: 1,
@@ -239,14 +239,14 @@ const player = {
 
 //enemies spawn, array and creation
 const spawnPoints = [
-	[4*tileW, 4*tileH],
-	[4*tileW, 10*tileH],
-	[4*tileW, 15*tileH],
-	[7*tileW, 4*tileH],
-	[11*tileW, 4*tileH],
+	[3*tileW, 3*tileH],
+	[7*tileW, 3*tileH],
+	[11*tileW, 3*tileH],
+	[15*tileW, 3*tileH],
+	[3*tileW, 10*tileH],
+	[7*tileW, 10*tileH],
 	[11*tileW, 10*tileH],
-	[11*tileW, 16*tileH],
-	[7*tileW, 15*tileH],
+	[13*tileW, 10*tileH],
 	];
 
 const ghosts = [];
@@ -269,13 +269,37 @@ function drawGame(){
 			let tileY = y*tileH;
 			let tileType = map[mapIndex];
 			if(tileType === 1){
-				wall.draw(tileX, tileY);
+				backWall.draw(tileX, tileY);
+			}
+			if(tileType === 8){
+				bottomLeft.draw(tileX, tileY);
+			}
+			if(tileType === 7){
+				bottomRight.draw(tileX, tileY);
+			}
+			if(tileType === 9){
+				door.draw(tileX, tileY);
 			}
 			if(tileType === 0){
-				dirt.draw(tileX, tileY);
+				floor.draw(tileX, tileY);
+			}
+			if(tileType === 3){
+				frontWall.draw(tileX, tileY);
+			}
+			if(tileType === 4){
+				leftWall.draw(tileX, tileY);
 			}
 			if(tileType === 2){
-				grass.draw(tileX, tileY);
+				rightWall.draw(tileX, tileY);
+			}
+			if(tileType === 5){
+				topLeft.draw(tileX, tileY);
+			}
+			if(tileType === 6){
+				topRight.draw(tileX, tileY);
+			}
+			if(tileType === 10){
+				wall.draw(tileX, tileY);
 			}
 		}
 	}
@@ -375,7 +399,6 @@ $('#start').on('touchstart', (event) => {
 })
 
 document.addEventListener('keydown', (event) => {
-	console.log(event.key);
 	if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.startDirection(event.key)
     player.stopAttack();

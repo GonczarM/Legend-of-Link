@@ -8,6 +8,10 @@ body {
   background-color: rgb(238,238,222);
 }
 
+canvas{
+	border: black solid 1px;
+}
+
 .screen{
 	background-color: rgb(150,150,160);
 	border-radius: 20px;
