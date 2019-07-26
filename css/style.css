@@ -6,6 +6,7 @@
 
 body { 
   background-color: rgb(238,238,222);
+  touch-action: manipulation;
 }
 
 .screen{
@@ -94,7 +95,7 @@ h1{
 .buttons{
 		display: block;
 		margin-top: 50px;
-		margin-left: 100px;
+		margin-left: 75px;
 	}
 
 button{
@@ -125,8 +126,8 @@ button{
 	position: absolute;
 	right: 15%;
 	border-radius: 75px;
-	height: 125px;
-	width: 125px;
+	height: 150px;
+	width: 150px;
 	background-color: red;
 	color: rgb(10,50,180);
 	font-size: 50px;
