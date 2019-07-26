@@ -135,7 +135,6 @@ button{
 	background-color: red;
 	color: rgb(10,50,180);
 	font-size: 50px;
-	touch-action: none;
 }
 
 #on, #start{

@@ -40,7 +40,7 @@ class Sprite {
 class Enemy {
 	constructor(x, y, id, picture){
 		this.alive = true;
-		this.speed = 3;
+		this.speed = 5;
 		this.image = new Image();
 		this.image.src = picture;
 		this.id = id
@@ -101,7 +101,7 @@ const player = {
 	x: tileW*1,
 	y: tileH*3,
 	unsheath: false,
-	speed: 3,
+	speed: 3.5,
 	attackTime: 1,
 	direction: {
     up: false,
@@ -109,23 +109,55 @@ const player = {
     left: false,
     right: false		
 	},
+	orientation: {
+		up: false,
+    down: true,
+    left: false,
+    right: false		
+	},
 	draw(){
-		linkForward.draw(this.x, this.y)
+		if(this.orientation.up === true){
+			linkBackward.draw(this.x, this.y) 
+		}
+    if(this.orientation.left === true){
+    	linkLeft.draw(this.x, this.y)
+   	}
+    if(this.orientation.right === true){
+    	linkRight.draw(this.x, this.y)
+    }
+    if(this.orientation.down === true){
+			linkForward.draw(this.x, this.y)
+		}
 	},
 	move(){
 		if(this.direction.up){
-			linkBackward.draw(this.x, this.y) 
+			this.orientation.up = true
+			this.orientation.down = false
+			this.orientation.left = false
+			this.orientation.right = false
 			this.y -= this.speed;
 		}
     if(this.direction.left){
-    	linkLeft.draw(this.x, this.y)
+    	this.orientation.left = true
+    	this.orientation.down = false
+    	this.orientation.right = false
+    	this.orientation.up = false
    	  this.x -= this.speed;
    	}
     if(this.direction.right){
-    	linkRight.draw(this.x, this.y)
+    	this.orientation.right = true
+    	this.orientation.down = false
+    	this.orientation.left = false
+    	this.orientation.up = false
     	this.x += this.speed;
     }
-    if(this.direction.down) this.y += this.speed;  
+    if(this.direction.down){
+    	this.orientation.down = true
+    	this.orientation.left = false
+    	this.orientation.right = false
+    	this.orientation.up = false
+  		this.y += this.speed; 
+  	} 
 	},
 	startDirection(key){
     if(key == 'w' || key == 'upPress') this.direction.up = true;
@@ -141,7 +173,7 @@ const player = {
   },
   //change sword to seperate sprite for one collision detection
   attack(enemy){
-		if(this.direction.up == true && this.unsheath == true){
+		if(this.orientation.up == true && this.unsheath == true){
 			swordUp.draw(this.x, this.y - tileH)
 			if(
 				this.y - tileH < enemy.y + tileH &&
@@ -154,7 +186,7 @@ const player = {
 				deadGhosts.push(enemy) 
 			}
 		}
-		if(this.direction.left == true && this.unsheath == true){
+		if(this.orientation.left == true && this.unsheath == true){
 			swordLeft.draw(this.x - tileW, this.y)
 			if(
 				this.x - tileW < enemy.x + tileW &&
@@ -167,7 +199,7 @@ const player = {
 				deadGhosts.push(enemy);
 			}
 		}
-		if(this.direction.right == true && this.unsheath == true){
+		if(this.orientation.right == true && this.unsheath == true){
 			swordRight.draw(this.x + tileW, this.y)
 			if(
 				this.x + (2*tileW) > enemy.x &&
@@ -180,7 +212,7 @@ const player = {
 				deadGhosts.push(enemy);
 			}
 		}
-		if(this.direction.down == true && this.unsheath == true){
+		if(this.orientation.down == true && this.unsheath == true){
 			swordDown.draw(this.x, this.y + tileH)
 			if(
 				this.y + (2*tileH) > enemy.y &&
@@ -506,12 +538,3 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
-
-const lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-  const now = (new Date()).getTime();
-  if (now - lastTouchEnd <= 300) {
-    event.preventDefault();
-  }
-  lastTouchEnd = now;
-}, false);
