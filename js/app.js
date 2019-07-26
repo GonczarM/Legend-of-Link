@@ -95,6 +95,10 @@ const linkForward = new Sprite("images/link forward.png");
 const linkBackward = new Sprite("images/link backward.png");
 const linkLeft = new Sprite("images/link left.png");
 const linkRight = new Sprite("images/link right.png");
+const attackForward = new Sprite("images/attackForward.png");
+const attackBackward = new Sprite("images/attackBack.png");
+const attackLeft = new Sprite("images/attackLeft.png");
+const attackRight = new Sprite("images/attackRight.png");
 
 //player object
 const player = {
@@ -174,6 +178,7 @@ const player = {
   //change sword to seperate sprite for one collision detection
   attack(enemy){
 		if(this.orientation.up == true && this.unsheath == true){
+			attackBackward.draw(this.x, this.y)
 			swordUp.draw(this.x, this.y - tileH)
 			if(
 				this.y - tileH < enemy.y + tileH &&
@@ -187,6 +192,7 @@ const player = {
 			}
 		}
 		if(this.orientation.left == true && this.unsheath == true){
+			attackLeft.draw(this.x, this.y)
 			swordLeft.draw(this.x - tileW, this.y)
 			if(
 				this.x - tileW < enemy.x + tileW &&
@@ -200,6 +206,7 @@ const player = {
 			}
 		}
 		if(this.orientation.right == true && this.unsheath == true){
+			attackRight.draw(this.x, this.y)
 			swordRight.draw(this.x + tileW, this.y)
 			if(
 				this.x + (2*tileW) > enemy.x &&
@@ -213,6 +220,7 @@ const player = {
 			}
 		}
 		if(this.orientation.down == true && this.unsheath == true){
+			attackForward.draw(this.x, this.y)
 			swordDown.draw(this.x, this.y + tileH)
 			if(
 				this.y + (2*tileH) > enemy.y &&
