@@ -506,13 +506,3 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
-
-
-const doubleTouchStartTimestamp = 0;
-$(document).bind("touchstart", function(event){
-    const now = +(new Date());
-    if (doubleTouchStartTimestamp + 100 > now){
-        event.preventDefault();
-    };
-    doubleTouchStartTimestamp = now;
-});
