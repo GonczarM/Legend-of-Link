@@ -2,11 +2,6 @@
 canvas = document.getElementById('zelda');
 ctx = canvas.getContext('2d');
 
-//when window finishes loading, should... begin intro music
-// Window.onload = function(){
-// 	intro.play();
-// }
-
 //global variablesws
 const tileW = 30;
 const tileH = 30;
@@ -334,34 +329,46 @@ function gameOver() {
   $(document).on('click', (event) => {
 		location.reload();
 	})
-	$(document).on('touchstart', (event) => {
+	$('#start').on('touchstart', (event) => {
 		location.reload();
 	})
 }
 
 function youWin(){
 	$('#zelda').css('display', 'none')
-	$('.win').show('fade', 2000)
+	$('.win').show('fade', 1000)
 	overworld.pause();
 	gameWon.play();	
 	$(document).on('click', (event) => {
 		location.reload();
 	})
-	$(document).on('touchstart', (event) => {
+	$('#start').on('touchstart', (event) => {
 		location.reload();
 	})
 }
 
 // event listeners
-$(document).on('click', (event) => {
-	$('#start').css("display", "none");
+$('#on').on('click', (event) => {
+	$('.screenOff').css("display", "none");
+	$('.intro').show('fade', 1000);
+	intro.play();
+});
+
+$('#on').on('touchstart', (event) => {
+	$('.screenOff').css("display", "none");
+	$('.intro').show('fade', 1000);
+	intro.play();
+})
+
+$('.intro').on('click', (event) => {
+	$('.intro').css("display", "none");
 	$('#zelda').css('display', 'block');
 	intro.pause();
 	overworld.play();
 });
 
-$(document).on('touchstart', (event) => {
-	$('#start').hide("fade", "slow");
+$('#start').on('touchstart', (event) => {
+	$('.intro').css("display", "none");
 	$('#zelda').css('display', 'block');
 	intro.pause();
 	overworld.play();

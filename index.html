@@ -9,49 +9,49 @@
 	<link rel="icon" href="images/triforce.png">
 </head>
 <body>
-	<header>
-		<img src="images/start.png" id="start">
-	</header>
 	<main>
-		<audio id="intro">
-			<source src="./Sounds/Intro.mp3" type="audio/mpeg">
-		</audio>
-		<audio id="overworld">
-			<source src="Sounds/Overworld.mp3" type="audio/mpeg">
-		</audio>
-		<audio id="enemyhit">
-			<source src="Sounds/enemyhit.wav">
-		</audio>
-		<canvas id="zelda" width="480" height="600"></canvas>
-		<div class="win">
-			<audio id="win">
-				<source src="Sounds/Triforce.mp3" type="audio/mpeg">
+		<button id="on">ON</button>
+		<div class="screen">
+			<div class="screenOff"></div>
+			<div class="intro">
+				<img src="images/start.png">
+				<audio id="intro">
+					<source src="./Sounds/Intro.mp3" type="audio/mpeg">
+				</audio>
+			</div>
+			<audio id="overworld">
+				<source src="Sounds/Overworld.mp3" type="audio/mpeg">
 			</audio>
-			<h1>Thanks Link, you're a hero of Hyrule.
-			Finally, peace returns to Hyrule.</h1>
-			<img src="images/triforceWin.png" id="triforce">
-		</div>
-		<div class="lose">
-			<audio id="lose">
-				<source src="Sounds/Game Over.mp3" type="audio/mpeg">
+			<audio id="enemyhit">
+				<source src="Sounds/enemyhit.wav">
 			</audio>
-			<img src="images/gameover.png" id="gameover">
+			<canvas id="zelda" width="480" height="600"></canvas>
+			<div class="win">
+				<audio id="win">
+					<source src="Sounds/Triforce.mp3" type="audio/mpeg">
+				</audio>
+				<h1>Thanks Link, you're a hero of Hyrule.
+				Finally, peace returns to Hyrule.</h1>
+				<img src="images/triforceWin.png" id="triforce">
+			</div>
+			<div class="lose">
+				<audio id="lose">
+					<source src="Sounds/Game Over.mp3" type="audio/mpeg">
+				</audio>
+				<img src="images/gameover.png" id="gameover">
+			</div>
 		</div>
+		<h1 class="nintendo">Nintendo</h1>
+		<h1 class="gameBoy">GAME BOY</h1>
 		<div class="buttons">
-			<button id="up">^</button>
-			<button id="left"><-</button>
-			<button id="right">-></button>
+			<button id="up"></button>
+			<button id="left"></button>
+			<button id="right"></button>
 			<button id="attack">A</button>
-			<button id="down">|</button>
+			<button id="down"></button>
+			<button id="start">Start</button>
 		</div>
 	</main>
-	<footer>
-		<div class="instructions">
-			<p>Move link around the page with WASD.
-			Attack the ghosts with your sword using spacebar. You swing your sword in the direction you're moving.</p>
-		</div>		
-	</footer>
-
 <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
