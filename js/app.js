@@ -390,8 +390,8 @@ function gameOver() {
   $('.lose').show();
   overworld.pause();
   gameOverMusic.play();
-  $("#on").attr("disabled", false);
-  $("#start").attr("disabled", false);
+  $("#on").prop("disabled", false);
+  $("#start").prop("disabled", false);
   $('#start').on('click', (event) => {
 		location.reload();
 	})
@@ -411,8 +411,8 @@ function youWin(){
 	$('.win').show();
 	overworld.pause();
 	gameWon.play();	
-	$("#on").attr("disabled", false);
-	$("#start").attr("disabled", false);
+	$("#on").prop("disabled", false);
+	$("#start").prop("disabled", false);
   $('#start').on('click', (event) => {
 		location.reload();
 	})
@@ -429,28 +429,38 @@ function youWin(){
 
 // event listeners
 
-$("#start").attr("disabled", true);
+$("#start").prop("disabled", true);
+$("#up").prop("disabled", true);
+$("#down").prop("disabled", true);
+$("#left").prop("disabled", true);
+$("#right").prop("disabled", true);
+$("#attack").prop("disabled", true);
 
 $('#on').on('click', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
-	$("#on").attr("disabled", true);
-	$("#start").attr("disabled", false);
+	$("#on").prop("disabled", true);
+	$("#start").prop("disabled", false);
 	intro.play();
 });
 
 $('#on').on('touchstart', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
-	$("#on").attr("disabled", true);
-	$("#start").attr("disabled", false);
+	$("#on").prop("disabled", true);
+	$("#start").prop("disabled", false);
 	intro.play();
 })
 
 $('#start').on('click', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
-	$("#start").attr("disabled", true);
+	$("#start").prop("disabled", true);
+	$("#up").prop("disabled", false);
+	$("#down").prop("disabled", false);
+	$("#left").prop("disabled", false);
+	$("#right").prop("disabled", false);
+	$("#attack").prop("disabled", false);
 	intro.pause();
 	overworld.play();
 });
@@ -458,7 +468,12 @@ $('#start').on('click', (event) => {
 $('#start').on('touchstart', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
-	$("#start").attr("disabled", true);
+	$("#start").prop("disabled", true);
+	$("#up").prop("disabled", false);
+	$("#down").prop("disabled", false);
+	$("#left").prop("disabled", false);
+	$("#right").prop("disabled", false);
+	$("#attack").prop("disabled", false);
 	intro.pause();
 	overworld.play();
 })
