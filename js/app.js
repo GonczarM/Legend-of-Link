@@ -390,8 +390,8 @@ function gameOver() {
   $('.lose').show();
   overworld.pause();
   gameOverMusic.play();
-  $("#on").prop("disabled", false);
-  $("#start").prop("disabled", false);
+  $("#on").attr("disabled", false);
+  $("#start").attr("disabled", false);
   $('#start').on('click', (event) => {
 		location.reload();
 	})
@@ -411,8 +411,8 @@ function youWin(){
 	$('.win').show();
 	overworld.pause();
 	gameWon.play();	
-	$("#on").prop("disabled", false);
-	$("#start").prop("disabled", false);
+	$("#on").attr("disabled", false);
+	$("#start").attr("disabled", false);
   $('#start').on('click', (event) => {
 		location.reload();
 	})
@@ -429,38 +429,38 @@ function youWin(){
 
 // event listeners
 
-$("#start").prop("disabled", true);
-$("#up").prop("disabled", true);
-$("#down").prop("disabled", true);
-$("#left").prop("disabled", true);
-$("#right").prop("disabled", true);
-$("#attack").prop("disabled", true);
+$("#start").attr("disabled", true);
+$("#up").attr("disabled", true);
+$("#down").attr("disabled", true);
+$("#left").attr("disabled", true);
+$("#right").attr("disabled", true);
+$("#attack").attr("disabled", true);
 
 $('#on').on('click', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
-	$("#on").prop("disabled", true);
-	$("#start").prop("disabled", false);
+	$("#on").attr("disabled", true);
+	$("#start").attr("disabled", false);
 	intro.play();
 });
 
 $('#on').on('touchstart', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
-	$("#on").prop("disabled", true);
-	$("#start").prop("disabled", false);
+	$("#on").attr("disabled", true);
+	$("#start").attr("disabled", false);
 	intro.play();
 })
 
 $('#start').on('click', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
-	$("#start").prop("disabled", true);
-	$("#up").prop("disabled", false);
-	$("#down").prop("disabled", false);
-	$("#left").prop("disabled", false);
-	$("#right").prop("disabled", false);
-	$("#attack").prop("disabled", false);
+	$("#start").attr("disabled", true);
+	$("#up").attr("disabled", false);
+	$("#down").attr("disabled", false);
+	$("#left").attr("disabled", false);
+	$("#right").attr("disabled", false);
+	$("#attack").attr("disabled", false);
 	intro.pause();
 	overworld.play();
 });
@@ -468,12 +468,12 @@ $('#start').on('click', (event) => {
 $('#start').on('touchstart', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
-	$("#start").prop("disabled", true);
+	$("#start").attr("disabled", true);
 	// $("#up").prop("disabled", false);
-	$("#down").prop("disabled", false);
-	$("#left").prop("disabled", false);
-	$("#right").prop("disabled", false);
-	$("#attack").prop("disabled", false);
+	$("#down").attr("disabled", false);
+	$("#left").attr("disabled", false);
+	$("#right").attr("disabled", false);
+	$("#attack").attr("disabled", false);
 	intro.pause();
 	overworld.play();
 })
