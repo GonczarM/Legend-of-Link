@@ -30,6 +30,11 @@ body {
 	margin: 0 auto;
 }
 
+.screenOff h1{
+	color: black;
+	margin: 130px 50px 0 50px;
+}
+
 .intro{
 	display: none;
 	text-align: center;
