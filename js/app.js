@@ -469,7 +469,7 @@ $('#start').on('touchstart', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
 	$("#start").prop("disabled", true);
-	$("#up").prop("disabled", false);
+	// $("#up").prop("disabled", false);
 	$("#down").prop("disabled", false);
 	$("#left").prop("disabled", false);
 	$("#right").prop("disabled", false);
