@@ -41,9 +41,12 @@ body {
 	width: 850px;
 }
 
+.game{
+	text-align: center;
+}
+
 #zelda {
 	border-radius: 5px;
-	margin: 0 auto;
 	display: none;
 }
 
@@ -151,7 +154,7 @@ button{
 }
 
 /* The switch - the box around the slider */
-.switch {
+.power {
 	margin-left: 50px;
   position: relative;
   display: inline-block;
@@ -160,7 +163,7 @@ button{
 }
 
 /* Hide default HTML checkbox */
-.switch input {
+.power input {
   opacity: 0;
   width: 0;
   height: 0;
