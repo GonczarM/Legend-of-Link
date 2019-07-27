@@ -390,18 +390,8 @@ function gameOver() {
   $('.lose').show();
   overworld.pause();
   gameOverMusic.play();
-  $("#on").attr("disabled", false);
-  $("#start").attr("disabled", false);
-  $('#start').on('click', (event) => {
-		location.reload();
-	})
-	$('#start').on('touchstart', (event) => {
-		location.reload();
-	})
-	$('#on').on('click', (event) => {
-		location.reload();
-	})
-	$('#on').on('touchstart', (event) => {
+	$("#on, #start").prop("disabled", false);
+  $('#start, #on').on('click touchstart', (event) => {
 		location.reload();
 	})
 }
@@ -411,81 +401,41 @@ function youWin(){
 	$('.win').show();
 	overworld.pause();
 	gameWon.play();	
-	$("#on").attr("disabled", false);
-	$("#start").attr("disabled", false);
-  $('#start').on('click', (event) => {
-		location.reload();
-	})
-	$('#start').on('touchstart', (event) => {
-		location.reload();
-	})
-	$('#on').on('click', (event) => {
-		location.reload();
-	})
-	$('#on').on('touchstart', (event) => {
+	$("#on, #start").prop("disabled", false);
+  $('#start, #on').on('click touchstart', (event) => {
 		location.reload();
 	})
 }
 
 // event listeners
 
-$("#start").attr("disabled", true);
-$("#up").attr("disabled", true);
-$("#down").attr("disabled", true);
-$("#left").attr("disabled", true);
-$("#right").attr("disabled", true);
-$("#attack").attr("disabled", true);
+$("#start, #up, #down, #left, #right, #attack").prop("disabled", true);
 
-$('#on').on('click', (event) => {
+$('#on').on('click touchstart', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
-	$("#on").attr("disabled", true);
-	$("#start").attr("disabled", false);
+	$("#on").prop("disabled", true);
+	$("#start").prop("disabled", false);
 	intro.play();
 });
 
-$('#on').on('touchstart', (event) => {
-	$('.screenOff').hide();
-	$('.intro').show();
-	$("#on").attr("disabled", true);
-	$("#start").attr("disabled", false);
-	intro.play();
-})
-
-$('#start').on('click', (event) => {
+$('#start').on('click touchstart', (event) => {
 	$('.intro').hide();
 	$('#zelda').show();;
-	$("#start").attr("disabled", true);
-	$("#up").attr("disabled", false);
-	$("#down").attr("disabled", false);
-	$("#left").attr("disabled", false);
-	$("#right").attr("disabled", false);
-	$("#attack").attr("disabled", false);
+	$("#start").prop("disabled", true);
+	$("#up, #down, #left, #right, #attack").prop("disabled", false);
 	intro.pause();
 	overworld.play();
 });
 
-$('#start').on('touchstart', (event) => {
-	$('.intro').hide();
-	$('#zelda').show();;
-	$("#start").attr("disabled", true);
-	// $("#up").prop("disabled", false);
-	$("#down").attr("disabled", false);
-	$("#left").attr("disabled", false);
-	$("#right").attr("disabled", false);
-	$("#attack").attr("disabled", false);
-	intro.pause();
-	overworld.play();
-})
-
-document.addEventListener('keydown', (event) => {
+$(document).on('keydown', (event) => {
 	if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.startDirection(event.key)
     player.stopAttack();
   }
 });
 
-document.addEventListener('keyup', (event) => {
+$(document).on('keyup', (event) => {
   if(['w', 'a', 's', 'd'].includes(event.key)) {
     player.stopDirection(event.key)
   }
@@ -547,7 +497,7 @@ $("#attack").on('touchstop', (event) => {
 		player.stopAttack(sheath)
 })
 
-document.addEventListener('keydown', (event) => {
+$(document).on('keydown', (event) => {
 	if([' '].includes(event.key)) {
 		if (!player.unsheath) {
 	    player.startAttack(event.key)
@@ -555,13 +505,13 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-document.addEventListener('keyup', (event) => {
+$(document).on('keyup', (event) => {
   if([' '].includes(event.key)) {
     player.stopAttack(event.key)
   }
 });
 
-document.addEventListener('keydown', (e) => {
+$(document).on('keydown', (e) => {
   if(e.keyCode == 32 && e.target == document.body) {
     e.preventDefault();
   }
