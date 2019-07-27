@@ -4,10 +4,6 @@
 	padding: 0;
 }
 
-html{
-	touch-action: none;
-}
-
 body { 
   background-color: rgb(238,238,222);
 }
@@ -100,6 +96,7 @@ h1{
 }
 
 .buttons{
+	touch-action: manipulation;
 	display: block;
 	margin-top: 25px;
 	margin-left: 75px;
@@ -142,6 +139,7 @@ button{
 }
 
 #start{
+	transform: rotate(340deg);
 	border-radius: 75px;
 	margin-left: 45%;
 	margin-top: 50px;
@@ -176,7 +174,6 @@ button{
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
   transition: .4s;
 }
 
@@ -188,13 +185,10 @@ button{
   left: 10px;
   bottom: 7px;
   background-color: white;
-  -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(83px);
-  -ms-transform: translateX(83px);
   transform: translateX(83px);
 }
 
@@ -205,4 +199,10 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+main{
+	padding-bottom: 150px;
+	border: gray 1px solid;
+	border-radius: 10px;
 }
