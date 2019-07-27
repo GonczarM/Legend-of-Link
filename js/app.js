@@ -429,16 +429,21 @@ function youWin(){
 
 // event listeners
 
+$("#start").attr("disabled", true);
+
 $('#on').on('click', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
 	$("#on").attr("disabled", true);
+	$("#start").attr("disabled", false);
 	intro.play();
 });
 
 $('#on').on('touchstart', (event) => {
 	$('.screenOff').hide();
 	$('.intro').show();
+	$("#on").attr("disabled", true);
+	$("#start").attr("disabled", false);
 	intro.play();
 })
 
