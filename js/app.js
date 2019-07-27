@@ -516,3 +516,19 @@ $(document).on('keydown', (e) => {
     e.preventDefault();
   }
 });
+
+$(document).ready(function(){
+	typeWriter();
+})
+
+let i = 0;
+const txt = "Welcome to Gonczar's own Gamer Boy Emulator, if you're using a computer press the WASD keys to move Link around the screen and space bar to have him attack. If you're using a phone the four control and A buttons will do the same. To play Legend of Link power on the device and then follow the in game instructions. When you perish to an Orkorak or slay them all simply power off the Gamer Boy to battle again.";
+const speed = 150;
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("instruct").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+typeWriter()
