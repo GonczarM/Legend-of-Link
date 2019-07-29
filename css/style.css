@@ -106,7 +106,7 @@ h1{
 	touch-action: none;
 }
 
-button{
+.buttons button{
 	border-radius: 5px;
 	border: none;
 	background-color: black;
@@ -153,59 +153,35 @@ button{
 	font-size: 50px;
 }
 
-/* The switch - the box around the slider */
 .power {
 	margin-left: 50px;
-  position: relative;
   display: inline-block;
   width: 150px;
   height: 75px;
+  background-color: rgb(150,150,160);
+  border-radius: 50px;
 }
 
-/* Hide default HTML checkbox */
-.power input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.power button{
+	background-color: white;
+	border-radius: 50px;
+	height: 60px;
+	margin: 7px 0 0 10px;
+	transition-duration: .4s;
 }
 
-/* The slider */
 .slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
+  height: 55px;
+  padding: 5px;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 60px;
-  width: 50px;
-  left: 10px;
-  bottom: 7px;
-  background-color: white;
-  transition: .4s;
-}
-
-input:checked + .slider:before {
-  transform: translateX(83px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 75px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+#on.down{
+	transition-duration: .4s;
+  transform: translateX(72px);
 }
 
 main{
-	padding-bottom: 150px;
+	padding-bottom: 50px;
 	border: gray 1px solid;
 	border-radius: 10px;
 }
